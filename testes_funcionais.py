@@ -1,5 +1,6 @@
 from selenium import webdriver
 import unittest
+from django.test import tag
 
 
 class CadastroDeNovoUsuarioTest(unittest.TestCase):
@@ -9,11 +10,12 @@ class CadastroDeNovoUsuarioTest(unittest.TestCase):
     def tearDown(self) -> None:
         self.browser.quit()
 
+    @tag('teste_funcional')
     def test_deve_cadastrar_novo_usuario_com_validacoes_de_preenchimento(self):
         # Ana acessa página de cadastro da AluraPic desejando se cadastrar na plataforma
         self.browser.get('http://localhost:8000')
         # Ela confirma que há no título da página menção à sua funcionalidade ("Cadastro")
-        self.assertIn("cadastro", self.browser.title)
+        self.assertIn("cadastro", self.browser.title.lower())
         self.fail('O teste ainda precisa ser finalizado')
 
         # Ela visualiza a página e identifica três caixas de input:
