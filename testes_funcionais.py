@@ -1,35 +1,47 @@
 from selenium import webdriver
+import unittest
 
-# Ana acessa página de cadastro da AluraPic desejando se cadastrar na plataforma
-browser = webdriver.Firefox()
-browser.get('http://localhost:8000')
 
-# Ela confirma que há no título da página menção à sua funcionalidade ("Cadastro")
-assert "cadastro" in browser.title.lower()
+class CadastroDeNovoUsuarioTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.browser = webdriver.Firefox()
 
-# Ela visualiza a página e identifica três caixas de input:
-# 1. E-mail
-# 2. Senha
-# 3. Confirmar senha
+    def tearDown(self) -> None:
+        self.browser.quit()
 
-# Também identifica um botão ("cadastrar")
+    def test_deve_cadastrar_novo_usuario_com_validacoes_de_preenchimento(self):
+        # Ana acessa página de cadastro da AluraPic desejando se cadastrar na plataforma
+        self.browser.get('http://localhost:8000')
+        # Ela confirma que há no título da página menção à sua funcionalidade ("Cadastro")
+        self.assertIn("cadastro", self.browser.title)
+        self.fail('O teste ainda precisa ser finalizado')
 
-# Desconfiada de sistemas web, ela preenche e-mail em padrão inválido
-# O sistema informa não reconhecer o texto como e-mail
+        # Ela visualiza a página e identifica três caixas de input:
+        # 1. E-mail
+        # 2. Senha
+        # 3. Confirmar senha
 
-# Ela preenche apenas o e-mail e tenta efetivar o cadastro
-# O sistema informa que senha deve ser preenchida
+        # Também identifica um botão ("cadastrar")
 
-# Ainda desejando testar a funcionalidade, preenche senha de apenas um dígito
-# O sistema informa que senha deve possuir 8 caracteres no mínimo
+        # Desconfiada de sistemas web, ela preenche e-mail em padrão inválido
+        # O sistema informa não reconhecer o texto como e-mail
 
-# Firme no intuito, preenche e-mail e senha, mas não a confirma
-# O sistema informa que ela deve confirmar a senha
+        # Ela preenche apenas o e-mail e tenta efetivar o cadastro
+        # O sistema informa que senha deve ser preenchida
 
-# Ela tenta confirmar senha diferente
-# O sistema informa divergência entre as duas senhas passadas
+        # Ainda desejando testar a funcionalidade, preenche senha de apenas um dígito
+        # O sistema informa que senha deve possuir 8 caracteres no mínimo
 
-# Satisfeita, ela faz o cadastro na plataforma
+        # Firme no intuito, preenche e-mail e senha, mas não a confirma
+        # O sistema informa que ela deve confirmar a senha
 
-# Ela sai do navegador para apresentar em paz sua dissertação de mestrado!
-browser.quit()
+        # Ela tenta confirmar senha diferente
+        # O sistema informa divergência entre as duas senhas passadas
+
+        # Satisfeita, ela faz o cadastro na plataforma
+
+        # Ela sai do navegador para apresentar em paz sua dissertação de mestrado!
+
+
+if __name__ == '__main__':
+    unittest.main()
