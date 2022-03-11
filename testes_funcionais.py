@@ -1,18 +1,40 @@
-from selenium import webdriver
-import unittest
+import time
+from collections import namedtuple
 from django.test import tag
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from typing import List
+import unittest
+
+
+DadosEntrada = namedtuple('DadosEntrada', 'valor atributo_html valor_atributo_html id_html')
 
 
 class CadastroDeNovoUsuarioTest(unittest.TestCase):
     def setUp(self) -> None:
         self.browser = webdriver.Firefox()
+        self.dados_email_padrao: DadosEntrada = DadosEntrada(valor='fulana@meuemail.com',
+                                                             atributo_html='placeholder',
+                                                             valor_atributo_html='E-mail',
+                                                             id_html='id_email')
+        self.dados_senha_padrao: DadosEntrada = DadosEntrada(valor='123abcABC',
+                                                             atributo_html='placeholder',
+                                                             valor_atributo_html='Senha',
+                                                             id_html='id_senha')
+        self.dados_confirmacao_senha_padrao: DadosEntrada = DadosEntrada(valor='123abcABC',
+                                                                         atributo_html='placeholder',
+                                                                         valor_atributo_html='Confirmar senha',
+                                                                         id_html='id_confirmar_senha')
+        self.dados_entrada: List[DadosEntrada] = [self.dados_email_padrao,
+                                                  self.dados_senha_padrao,
+                                                  self.dados_confirmacao_senha_padrao]
 
     def tearDown(self) -> None:
         self.browser.quit()
 
     @tag('teste_funcional')
-    def test_deve_cadastrar_novo_usuario_com_validacoes_de_preenchimento(self):
-        # Ana acessa página de cadastro da AluraPic desejando se cadastrar na plataforma
+    def test_deve_cadastrar_novo_usuario_com_preenchimento_correto(self):
+        # Fulana acessa página de cadastro da AluraPic desejando se cadastrar na plataforma
         self.browser.get('http://localhost:8000')
         # Ela confirma que há no título e no cabeçalho da página menção à sua funcionalidade ("Cadastro")
         self.assertIn("cadastro", self.browser.title.lower())
@@ -23,25 +45,28 @@ class CadastroDeNovoUsuarioTest(unittest.TestCase):
         # 1. E-mail
         # 2. Senha
         # 3. Confirmar senha
+        input_email = self.browser.find_element_by_id('id_email')
+        self.assertIsNotNone(input_email)
+        input_senha = self.browser.find_element_by_id('id_senha')
+        self.assertIsNotNone(input_senha)
+        input_confirmar_senha = self.browser.find_element_by_id('id_confirmar_senha')
+        self.assertIsNotNone(input_confirmar_senha)
 
-        # Também identifica um botão ("cadastrar")
+        # Satisfeita, ela decide inputar seus dados para fazer o cadastro na plataforma
+        for dado in self.dados_entrada:
+            inputbox = self.browser.find_element_by_id(dado.id_html)
+            self.assertEqual(
+                inputbox.get_attribute(dado.atributo_html),
+                dado.valor_atributo_html
+            )
 
-        # Desconfiada de sistemas web, ela preenche e-mail em padrão inválido
-        # O sistema informa não reconhecer o texto como e-mail
+        # Após inserir os dados, ela confirma o cadastro
+        inputbox = self.browser.find_element_by_id('id_confirmar')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
 
-        # Ela preenche apenas o e-mail e tenta efetivar o cadastro
-        # O sistema informa que senha deve ser preenchida
-
-        # Ainda desejando testar a funcionalidade, preenche senha de apenas um dígito
-        # O sistema informa que senha deve possuir 8 caracteres no mínimo
-
-        # Firme no intuito, preenche e-mail e senha, mas não a confirma
-        # O sistema informa que ela deve confirmar a senha
-
-        # Ela tenta confirmar senha diferente
-        # O sistema informa divergência entre as duas senhas passadas
-
-        # Satisfeita, ela faz o cadastro na plataforma
+        # Após confirmação, ela é redirecionada para página de login
+        self.assertIn("login", self.browser.title.lower())
 
         # Ela sai do navegador para apresentar em paz sua dissertação de mestrado!
 

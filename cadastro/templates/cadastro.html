@@ -1,5 +1,17 @@
+<!DOCTYPE html>
 <html>
-    <title>
-        Cadastro
-    </title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastro</title>
+    </head>
+    <body>
+        <h1>Cadastro de Usuário</h1>
+        <input id="id_email" placeholder="E-mail" /> <br><br>
+        <input id="id_senha" placeholder="Senha" /> <br><br>
+        <input id="id_confirmar_senha" placeholder="Confirmar senha" /> <br><br>
+        <form action="" method="post">
+            <input type="submit" value="Confirmar" id="id_confirmar" name="confirmar">
+            {% csrf_token %}
+        </form>
+    </body>
 </html>
