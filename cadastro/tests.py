@@ -1,6 +1,7 @@
-from django.http import HttpRequest
 from django.urls import resolve
-from django.test import TestCase
+from django.test import (
+    TestCase,
+)
 from cadastro.views import pagina_cadastro
 
 
@@ -11,9 +12,5 @@ class HomePageTest(TestCase):
         self.assertEqual(encontrou.func, pagina_cadastro)
 
     def test_pagina_cadastro_retorna_html_esperado(self):
-        request = HttpRequest()
-        resposta = pagina_cadastro(request)
-        html_pagina_cadastro: str = resposta.content.decode('utf8')
-        self.assertTrue(html_pagina_cadastro.startswith('<html>'))
-        self.assertIn('<title>Cadastro</title>', html_pagina_cadastro)
-        self.assertTrue(html_pagina_cadastro.endswith('</html>'))
+        resposta = self.client.get('/')
+        self.assertTemplateUsed(resposta, 'cadastro.html')
