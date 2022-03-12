@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" lang="en">
         <title>Cadastro</title>
+        <style>
+            .errorlist {color: red;}
+        </style>
     </head>
     <body>
         <h1>Cadastro de Usuário</h1>
-        <input id="id_email" placeholder="E-mail" /> <br><br>
-        <input id="id_senha" placeholder="Senha" /> <br><br>
-        <input id="id_confirmar_senha" placeholder="Confirmar senha" /> <br><br>
         <form action="" method="post">
-            <input type="submit" value="Confirmar" id="id_confirmar" name="confirmar">
             {% csrf_token %}
+            {{ formulario.as_p }}
+            <input id="confirmar_cadastro" type="submit" value="Confirmar"  name="confirmar">
         </form>
+
     </body>
 </html>

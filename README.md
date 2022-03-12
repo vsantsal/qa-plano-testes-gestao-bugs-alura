@@ -26,7 +26,7 @@ A senha deve ter no mínimo 8 caracteres.
 ```
 
 
-## Observações
+## Anotações do desenvolvimento
 
 ### Testes funcionais
 
@@ -36,3 +36,11 @@ Para não impactarem os testes unitários que desejamos executar ao rodar o coma
 recomenda-se marcá-los com flags, de nome "testes_funcionais" (para ler mais sobre a anotação do Django, ler https://docs.djangoproject.com/en/4.0/topics/testing/tools/#tagging-tests).
 
 Para não serem executados, utilizar então o comando `python manage.py test --exclude-tag=teste_funcional`.
+
+### Formulários
+
+Dado que a funcionalidade cadastro demandava conhecimento formulários HTML, sentiu-se necessidade de estudar a documentação do Django sobre como trabalhar com eles (https://docs.djangoproject.com/en/4.0/topics/forms/).
+
+Para utilizar *placeholders* nos forms em vez *label*, consultamos a documentação de widgets (https://docs.djangoproject.com/en/4.0/ref/forms/widgets/).
+
+Para realização das validações expressas nas regras de negócios, consultamos a documentação de *Forms and field validation* (https://docs.djangoproject.com/en/4.0/ref/forms/validation/).
