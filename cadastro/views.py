@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from cadastro.forms import CadastroUsuarioForm
 
@@ -9,5 +9,5 @@ def pagina_cadastro(request):
     if request.method == 'POST':
         formulario = CadastroUsuarioForm(request.POST)
         if formulario.is_valid():
-            return render(request, 'login.html')
+            return redirect(to='/login')
     return render(request, 'cadastro.html', {'formulario': formulario})

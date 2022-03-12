@@ -12,6 +12,7 @@ DadosEntrada = namedtuple('DadosEntrada', 'valor atributo_html valor_atributo_ht
 
 class CadastroDeNovoUsuarioTest(unittest.TestCase):
     def setUp(self) -> None:
+        self._url_cadastro: str = 'http://localhost:8000/cadastro'
         self.browser = webdriver.Firefox()
         self.id_submissao_dados: str = 'confirmar_cadastro'
         self.dados_email_padrao: DadosEntrada = DadosEntrada(valor='fulana@meuemail.com',
@@ -36,7 +37,7 @@ class CadastroDeNovoUsuarioTest(unittest.TestCase):
     @tag('teste_funcional')
     def test_deve_cadastrar_novo_usuario_com_preenchimento_correto(self):
         # Fulana acessa página de cadastro da AluraPic desejando se cadastrar na plataforma
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self._url_cadastro)
         # Ela confirma que há no título e no cabeçalho da página menção à sua funcionalidade ("Cadastro")
         self.assertIn("cadastro", self.browser.title.lower())
         texto_cabecalho: str = self.browser.find_element_by_tag_name('h1').text.lower()
@@ -69,7 +70,7 @@ class CadastroDeNovoUsuarioTest(unittest.TestCase):
 
         # Após confirmação, ela é redirecionada para página de login
         self.assertIn("login", self.browser.title.lower())
-
+        self.assertIn("login", self.browser.current_url)
         # Ela sai do navegador para apresentar em paz sua dissertação de mestrado!
 
     # @unittest.skip('later')
@@ -82,7 +83,7 @@ class CadastroDeNovoUsuarioTest(unittest.TestCase):
     def _helper_cenario_nao_preenchimento_de_campo(self, id_campo_vazio: str):
         # Fulana acessa página de cadastro da AluraPic desejando testar se pode se cadastrar
         # sem preencher um de seus campos
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self._url_cadastro)
 
         # Ela preenche os demais campos que não o campo em teste a ficar vazio
         for dado in self.dados_entrada:
