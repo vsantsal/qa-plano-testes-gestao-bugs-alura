@@ -8,6 +8,7 @@ Desenvolveremos no presente repositório funcionalidades utilizadas como exemplo
 
 Como processo de desenvolvimento, nos basearemos no roteiro ilustrado nos capítulos iniciais do livro "TDD com Python", de Harry Percival (https://www.obeythetestinggoat.com/book).
 
+
 ### Funcionalidade Cadastro
 
 A primeira funcionalidade a desenvolvermos será a de Cadastro, cuja implementação deverá obedecer às regras:
@@ -25,3 +26,21 @@ A senha deve ter no mínimo 8 caracteres.
 ```
 
 
+## Anotações do desenvolvimento
+
+### Testes funcionais
+
+O script `testes_funcionais.py` possui classes responsáveis por execução de testes funcionais do sistema.
+
+Para não impactarem os testes unitários que desejamos executar ao rodar o comando `python manage.py test`, 
+recomenda-se marcá-los com flags, de nome "testes_funcionais" (para ler mais sobre a anotação do Django, ler https://docs.djangoproject.com/en/4.0/topics/testing/tools/#tagging-tests).
+
+Para não serem executados, utilizar então o comando `python manage.py test --exclude-tag=teste_funcional`.
+
+### Formulários
+
+Dado que a funcionalidade cadastro demandava conhecimento formulários HTML, sentiu-se necessidade de estudar a documentação do Django sobre como trabalhar com eles (https://docs.djangoproject.com/en/4.0/topics/forms/).
+
+Para utilizar *placeholders* nos forms em vez *label*, consultamos a documentação de widgets (https://docs.djangoproject.com/en/4.0/ref/forms/widgets/).
+
+Para realização das validações expressas nas regras de negócios, consultamos a documentação de *Forms and field validation* (https://docs.djangoproject.com/en/4.0/ref/forms/validation/).
