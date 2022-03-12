@@ -28,14 +28,20 @@ A senha deve ter no mínimo 8 caracteres.
 
 ## Anotações do desenvolvimento
 
-### Testes funcionais
+### Testes 
+
+### Unitários
 
 O script `testes_funcionais.py` possui classes responsáveis por execução de testes funcionais do sistema.
 
-Para não impactarem os testes unitários que desejamos executar ao rodar o comando `python manage.py test`, 
+Para não impactarem os testes unitários que usualmente desejamos executar ao rodar o comando `python manage.py test`, 
 recomenda-se marcá-los com flags, de nome "testes_funcionais" (para ler mais sobre a anotação do Django, ler https://docs.djangoproject.com/en/4.0/topics/testing/tools/#tagging-tests).
 
-Para não serem executados, utilizar então o comando `python manage.py test --exclude-tag=teste_funcional`.
+Assim, recomenda-se rodar os testes unitários com o comando `python manage.py test --exclude-tag=teste_funcional`.
+
+#### Funcionais
+
+Rodar o script `testes_funcionais.py` com o comando `python testes_funcionais.py`.
 
 ### Formulários
 
@@ -44,3 +50,5 @@ Dado que a funcionalidade cadastro demandava conhecimento formulários HTML, sen
 Para utilizar *placeholders* nos forms em vez *label*, consultamos a documentação de widgets (https://docs.djangoproject.com/en/4.0/ref/forms/widgets/).
 
 Para realização das validações expressas nas regras de negócios, consultamos a documentação de *Forms and field validation* (https://docs.djangoproject.com/en/4.0/ref/forms/validation/).
+
+Como estudo complementar, assistir ao curso da Alura "Formulários no Django 3: criando e validando dados" (https://cursos.alura.com.br/course/django-validando-formularios).
