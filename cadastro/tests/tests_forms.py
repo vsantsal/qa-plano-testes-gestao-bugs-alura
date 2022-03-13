@@ -27,7 +27,7 @@ class CadastroUsuarioFormTest(TestCase):
             formulario = CadastroUsuarioForm(self.cadastro_correto)
             self.assertFalse(formulario.is_valid())
             self.assertEqual(formulario.errors[campo][0],
-                             'This field is required.')
+                             'Este campo é obrigatório.')
             self.cadastro_correto[campo] = valor_original
 
     def test_deve_ser_invalido_para_senha_com_menos_de_8_caracteres(self):
@@ -36,14 +36,14 @@ class CadastroUsuarioFormTest(TestCase):
         formulario = CadastroUsuarioForm(self.cadastro_correto)
         self.assertFalse(formulario.is_valid())
         self.assertEqual(formulario.errors['confirmar_senha'][0],
-                         'Ensure this value has at least 8 characters (it has 7).')
+                         'Certifique-se de que o valor tenha no mínimo 8 caracteres (ele possui 7).')
 
     def test_deve_ser_invalido_se_senha_e_confirmacao_sao_diferentes(self):
         self.cadastro_correto['confirmar_senha'] = '987654321'
         formulario = CadastroUsuarioForm(self.cadastro_correto)
         self.assertFalse(formulario.is_valid())
         self.assertEqual(formulario.errors['confirmar_senha'][0],
-                         'Passwords do not match.')
+                         'Senhas divergentes.')
 
     def test_deve_ser_invalido_se_email_nao_eh_valido(self):
         for remetente in ('fulana', 'fulanameuemail.com', 'fulana@meuemail'):
@@ -51,4 +51,4 @@ class CadastroUsuarioFormTest(TestCase):
             formulario = CadastroUsuarioForm(self.cadastro_correto)
             self.assertFalse(formulario.is_valid())
             self.assertEqual(formulario.errors['email'][0],
-                             'Enter a valid email address.')
+                             'Informe um endereço de email válido.')
