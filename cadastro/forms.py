@@ -24,7 +24,7 @@ class CadastroUsuarioForm(forms.Form):
         self._cleaned_data = super(CadastroUsuarioForm, self).clean()
 
         if self._senhas_sao_incompatives():
-            self._errors['confirmar_senha'] = self.error_class(['Passwords do not match.'])
+            self._errors['confirmar_senha'] = self.error_class(['Senhas divergentes.'])
 
         del self.cleaned_data
         return None
