@@ -12,7 +12,11 @@
     <body>
         <section class="container mt-2">
             <h1>Cadastro de Usuário</h1>
-            <form action="" method="post">
+            {% if formulario.is_valid %}
+                <form action="{% url 'login' %}" method="post">
+            {% else %}
+                <form action="{% url 'cadastro' %}" method="post">
+            {% endif %}
                 {% csrf_token %}
                 {{ formulario.as_p }}
                 <input id="confirmar_cadastro" type="submit" value="Confirmar"  name="confirmar" class="btn btn-success">
