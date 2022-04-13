@@ -2,6 +2,8 @@ language: python
 python:
   - 3.9
 install:
-  - pip install -q -r requirements.txt
+  - pip install -q -r requirements-dev.txt
 script:
-  - python manage.py test --exclude-tag=teste_funcional
+  - coverage run manage.py test --exclude-tag=teste_funcional
+after_script:
+  -  coveralls
