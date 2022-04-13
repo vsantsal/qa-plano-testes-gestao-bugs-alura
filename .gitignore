@@ -128,6 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-*settings.py
 
 .idea
+
+# settings dos ambientes testing e production
+alurapic/settings/production.py
+alurapic/settings/testing.py

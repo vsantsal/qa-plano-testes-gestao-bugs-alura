@@ -1,4 +1,3 @@
-from collections import namedtuple
 from django.test import (
     TestCase,
 )
@@ -32,7 +31,7 @@ class CadastroUsuarioFormTest(TestCase):
 
     def test_deve_ser_invalido_para_senha_com_menos_de_8_caracteres(self):
         self.cadastro_correto['senha'] = self.cadastro_correto.get('senha')[:-1]
-        self.cadastro_correto['confirmar_senha'] =self.cadastro_correto['senha']
+        self.cadastro_correto['confirmar_senha'] = self.cadastro_correto['senha']
         formulario = CadastroUsuarioForm(self.cadastro_correto)
         self.assertFalse(formulario.is_valid())
         self.assertEqual(formulario.errors['confirmar_senha'][0],
