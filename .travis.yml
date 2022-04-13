@@ -3,10 +3,7 @@ python:
   - 3.9
 install:
   - pip install -q -r requirements-dev.txt
-before_script:
-  - python manage.py runserver &
 script:
   - coverage run manage.py test --exclude-tag=teste_funcional
-  - coverage run testes_funcionais.py
 after_script:
   -  coveralls
