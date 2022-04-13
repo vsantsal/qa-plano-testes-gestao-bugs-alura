@@ -2,6 +2,8 @@
 
 Repositório para acompanhar o curso "Quality Assurance" (https://cursos.alura.com.br/course/quality-assurance-plano-testes-gestao-bugs) da Alura, desenvolvendo e testando a funcionalidade Cadastro com o framework Django
 
+[![Build Status](https://app.travis-ci.com/vsantsal/qa-plano-testes-gestao-bugs-alura.svg?branch=main)](https://app.travis-ci.com/vsantsal/qa-plano-testes-gestao-bugs-alura)
+
 ## Roteiro
 
 Desenvolveremos no presente repositório funcionalidades utilizadas como exemplos/exercícios no curso "Quality Assurance: plano de testes e gestão de bugs", utilizando o framework Django.
